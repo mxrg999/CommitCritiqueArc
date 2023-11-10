@@ -1,5 +1,6 @@
 import requests
-import openai
+from openai import OpenAI
+
 
 def handle_push_event(payload, github_api_token, openai_api_key):
     repo_full_name = payload['repository']['full_name']
@@ -30,8 +31,10 @@ def comment_on_commit(commit_sha, repo_full_name, comment, github_api_token):
 
 
 def generate_comment(commit, openai_api_key):
+    client = OpenAI(api_key=openai_api_key)
+
     # Configure OpenAI with your API key
-    openai.api_key = openai_api_key
+    
 
     # Extract necessary information from the commit
     commit_message = commit['message']
@@ -44,11 +47,9 @@ def generate_comment(commit, openai_api_key):
 
     # Call the OpenAI API
     try:
-        response = openai.Completion.create(
-            engine="text-davinci-003",  # or another engine of your choice
-            prompt=prompt,
-            max_tokens=150  # Adjust as needed
-        )
+        response = client.completions.create(engine="text-davinci-003",  # or another engine of your choice
+        prompt=prompt,
+        max_tokens=150)
         ai_comment = response.choices[0].text.strip()
         return f"Hey @{author_name}! Here's some feedback on your commit: {ai_comment}\nCommit URL: {commit_url}"
     except Exception as e:
