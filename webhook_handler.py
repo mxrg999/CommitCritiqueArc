@@ -30,27 +30,37 @@ def comment_on_commit(commit_sha, repo_full_name, comment, github_api_token):
 
 
 
+import requests
+
 def generate_comment(commit, openai_api_key):
-    client = OpenAI(api_key=openai_api_key)
+    # API endpoint for the chat model
+    chat_api_url = "https://api.openai.com/v1/chat/completions"
 
     # Extract necessary information from the commit
     commit_message = commit['message']
     author_name = commit['author']['name']
-    commit_url = commit['url']
 
-    # Define the prompt for the AI
-    prompt = f"A commit was made by {author_name} with the message '{commit_message}'. " \
-             "Provide a constructive comment about the commit."
+    # Define the messages for the chat
+    messages = [
+        {"role": "system", "content": "You are a helpful assistant providing feedback on GitHub commits."},
+        {"role": "user", "content": f"A commit was made by {author_name} with the message '{commit_message}'. Can you provide some constructive feedback?"}
+    ]
 
-    # Call the OpenAI API
+    headers = {
+        'Authorization': f'Bearer {openai_api_key}',
+        'Content-Type': 'application/json'
+    }
+
+    data = {
+        "model": "gpt-3.5-turbo",
+        "messages": messages
+    }
+
     try:
-        response = client.completions.create(
-            model="gpt-3.5-turbo-1106",
-            prompt=prompt,
-            max_tokens=150
-        )
-        ai_comment = response.choices[0].text.strip()
-        return f"Hey @{author_name}! Here's some feedback on your commit: {ai_comment}\nCommit URL: {commit_url}"
+        response = requests.post(chat_api_url, json=data, headers=headers)
+        response_json = response.json()
+        ai_comment = response_json['choices'][0]['message']['content'].strip()
+        return f"Hey @{author_name}! Here's some feedback on your commit: {ai_comment}"
     except Exception as e:
         print(f"Error while generating comment: {e}")
         return "Thank you for your commit!"
