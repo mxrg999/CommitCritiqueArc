@@ -33,9 +33,6 @@ def comment_on_commit(commit_sha, repo_full_name, comment, github_api_token):
 def generate_comment(commit, openai_api_key):
     client = OpenAI(api_key=openai_api_key)
 
-    # Configure OpenAI with your API key
-    
-
     # Extract necessary information from the commit
     commit_message = commit['message']
     author_name = commit['author']['name']
@@ -47,31 +44,13 @@ def generate_comment(commit, openai_api_key):
 
     # Call the OpenAI API
     try:
-        response = client.completions.create(engine="text-davinci-003",  # or another engine of your choice
-        prompt=prompt,
-        max_tokens=150)
+        response = client.completions.create(
+            model="gpt-3.5-turbo-1106",
+            prompt=prompt,
+            max_tokens=150
+        )
         ai_comment = response.choices[0].text.strip()
         return f"Hey @{author_name}! Here's some feedback on your commit: {ai_comment}\nCommit URL: {commit_url}"
     except Exception as e:
         print(f"Error while generating comment: {e}")
         return "Thank you for your commit!"
-
-
-
-
-""" def generate_comment(commit):
-    # Get the commit message
-    commit_message = commit['message']
-
-    # Get the author name
-    author_name = commit['author']['name']
-
-    # Get the commit URL
-    commit_url = commit['url']
-
-    # Generate the comment
-    comment = f"Hey @{author_name}! I noticed that your commit message is '{commit_message}'. " \
-              f"Please remember to follow the commit message guidelines: " \
-              f"Do's: https://chris.beams.io/posts/git-commit/#do " \
-
-    return comment """
