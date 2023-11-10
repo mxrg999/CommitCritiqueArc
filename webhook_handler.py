@@ -39,6 +39,7 @@ def generate_comment(commit):
 
     # Generate the comment
     comment = f"Hey @{author_name}! I noticed that your commit message is '{commit_message}'. " \
-              f"Please remember to follow the commit message guidelines: "
+              f"Please remember to follow the commit message guidelines: " \
+              f"Do's: https://chris.beams.io/posts/git-commit/#do " \
     
     return comment
