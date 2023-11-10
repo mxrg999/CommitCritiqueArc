@@ -23,12 +23,13 @@ def webhook():
     
     
     github_api_token = os.getenv('GITHUB_API_TOKEN')
+    openai_api_key = os.getenv('OPENAI_API_KEY')
 
 
     # Handle the event
     event = request.headers.get('X-GitHub-Event', 'ping')
     if event == "push":
-        handle_push_event(request.json, github_api_token)
+        handle_push_event(request.json, github_api_token, openai_api_key)
         return '', 204
     else:
         # For now, only push events
