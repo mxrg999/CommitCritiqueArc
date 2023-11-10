@@ -39,5 +39,4 @@ def generate_comment(commit):
 
     # Generate the comment
     comment = f"Hey @{author_name}! I noticed that your commit message is '{commit_message}'. " \
-              f"Please remember to follow the commit message guidelines: " \
-              f"
+              f"Please remember to follow the commit message guidelines: "
