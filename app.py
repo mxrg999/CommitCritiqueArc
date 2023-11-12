@@ -37,7 +37,7 @@ def webhook():
     # Handle the event
     event = request.headers.get('X-GitHub-Event', 'ping')
     if event == "push":
-        handle_push_event(request.json, app_context)
+        handle_push_event(request.json, app_context, config_section)
         return '', 204
     else:
         return '', 204
