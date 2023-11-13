@@ -5,12 +5,9 @@ This project is a simple Flask application that receives webhook events from Git
 ## Vision and TODOs
 
 - [x] Integrate AI to analyze and provide feedback on commits automatically.
+- [x] Provide customization options for feedback types and levels based on user preferences.
 - [ ] Create an easy-to-deploy server structure for quick setup.
-- [ ] Develop a user-friendly interface for managing webhook configurations and viewing AI feedback.
-- [ ] Implement authorization for secure webhook handling.
 - [ ] Set up a CI/CD pipeline for automated testing and deployment of the webhook receiver service.
-- [ ] Provide customization options for feedback types and levels based on user preferences.
-- [ ] Add support for multiple programming languages and commit styles.
 
 ## Local Development Setup
 
@@ -22,6 +19,8 @@ To run this project locally, you'll need Python and `ngrok` installed on your de
 - Flask
 - `python-dotenv`
 - `requests`
+- `Werkzeug`
+- `openai`
 
 ### Installation
 
