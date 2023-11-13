@@ -19,6 +19,8 @@ To run this project locally, you'll need Python and `ngrok` installed on your de
 - Flask
 - `python-dotenv`
 - `requests`
+- `Werkzeug`
+- `openai`
 
 ### Installation
 
