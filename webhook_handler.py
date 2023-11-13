@@ -22,7 +22,6 @@ def handle_push_event(payload, app_context, config_section):
 
 
 def comment_on_commit(commit_sha, repo_full_name, comment, github_api_token):
-    # Correct API URL for posting a comment
     comments_url = f"https://api.github.com/repos/{repo_full_name}/commits/{commit_sha}/comments"
 
     headers = {
