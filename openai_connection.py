@@ -32,7 +32,7 @@ class OpenAIConnection:
             response = requests.post(self.chat_api_url, json=data, headers=headers)
             response_json = response.json()
             ai_comment = response_json['choices'][0]['message']['content'].strip()
-            return f"[CommitCritiqueArc](https://github.com/mxrg999/CommitCritiqueArc): {ai_comment}"
+            return f"[CommitCritiqueArc](https://github.com/mxrg999/CommitCritiqueArc):\n {ai_comment}"
         except Exception as e:
             print(f"Error while generating comment: {e}")
             return "Thank you for your commit!"
