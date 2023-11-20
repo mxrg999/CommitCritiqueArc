@@ -14,8 +14,9 @@ services:
     image: wernight/ngrok
     ports:
       - "4040:4040"
-    command: sh -c 'ngrok authtoken $$NGROK_AUTH && ngrok http flask-app:5000'
+    command: sh -c 'ngrok authtoken $$NGROK_AUTH && ngrok http -hostname=$$NGROK_HOSTNAME flask-app:5000'
     environment:
       - NGROK_AUTH=${NGROK_AUTH}
+      - NGROK_HOSTNAME=${NGROK_HOSTNAME}
     depends_on:
       - flask-app
