@@ -7,6 +7,7 @@ This project is a simple Flask application that receives webhook events from Git
 - [x] Integrate AI to analyze and provide feedback on commits automatically.
 - [x] Provide customization options for feedback types and levels based on user preferences.
 - [ ] Create an easy-to-deploy server structure for quick setup.
+   - [x] Create a docker-compose for running the script    
 - [ ] Set up a CI/CD pipeline for automated testing and deployment of the webhook receiver service.
 
 ## Local Development Setup
