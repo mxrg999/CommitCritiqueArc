@@ -8,8 +8,8 @@ services:
       - "5000:5000"
     env_file:
       - .env
-    volumes:
-      - .:/usr/app/src
+    #volumes:
+    #  - .:/usr/app/src
 
   ngrok:
     image: wernight/ngrok
