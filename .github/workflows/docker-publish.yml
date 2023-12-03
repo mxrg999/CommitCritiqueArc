@@ -25,4 +25,4 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ghcr.io/${{ github.repository }}/CommitCritiqueArc:latest
+        tags: ghcr.io/${{ github.repository }}/commit-critique-arc:latest
